@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CampusMate - Profile</title>
+    <!-- Apply dark mode early (before CSS loads) -->
+  <script>
+    if (localStorage.getItem("theme") === "dark") {
+      document.documentElement.classList.add("dark-mode");
+    }
+  </script>
+
+  <link rel="stylesheet" href="profile.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    /* Add small styles for profile photo preview */
+    .profile-photo img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #555;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <button id="toggleModeBtn" style="position: fixed; top: 10px; right: 10px; z-index: 1001;">🌙 Dark Mode</button>
+
+  <div class="profile-container">
+    <div class="profile-top">
+      <div class="profile-photo">
+        <!-- Clickable image to upload new photo -->
+        <img id="profileImage" src="assets/profile_pic.jpg" alt="Profile Photo" title="Click to change photo" />
+        <input type="file" id="photoUpload" accept="image/*" style="display:none" />
+      </div>
+      <div class="profile-info">
+        <input type="text" id="name" placeholder="Full Name" required />
+        <input type="text" id="urn" placeholder="URN" required />
+
+        <select id="course" required>
+          <option value="">Select Course</option>
+          <option value="B.Tech">B.Tech</option>
+          <option value="M.Tech">M.Tech</option>
+          <option value="MCA">MCA</option>
+          <!-- Add more if needed -->
+        </select>
+
+        <select id="year" required>
+          <option value="">Select Year</option>
+          <option value="1st">1st Year</option>
+          <option value="2nd">2nd Year</option>
+          <option value="3rd">3rd Year</option>
+          <option value="4th">4th Year</option>
+        </select>
+
+        <select id="department" required>
+          <option value="">Select Department</option>
+          <option value="CSE">CSE</option>
+          <option value="ECE">ECE</option>
+          <option value="ME">ME</option>
+          <option value="CE">CE</option>
+          <!-- Add more if needed -->
+        </select>
+
+        <input type="text" id="skills" placeholder="Skills (comma-separated)" />
+        <input type="text" id="interests" placeholder="Interests" />
+
+        <button id="saveProfileBtn">💾 Save Profile</button>
+      </div>
+    </div>
+
+    <hr />
+  </div>
+
+  <!-- Bottom Navbar -->
+  <nav class="bottom-navbar">
+    <a href="index.html"><button class="nav-btn"><span>🏠</span><small>Home</small></button></a>
+    <a href="index.html#searchSection"><button class="nav-btn"><span>🔍</span><small>Search</small></button></a>
+    <a href="index.html#postSection"><button class="nav-btn post-btn"><span>➕</span><small>Post</small></button></a>
+    <a href="profile.html"><button class="nav-btn"><span>👤</span><small>Profile</small></button></a>
+    <a href="browse.html" style="text-decoration: none;">
+      <button class="nav-btn"><span>🌐</span><small>Browse</small></button>
+    </a>
+  </nav>
+
+<div id="profileSummary" class="profile-summary" style="display:none;"></div>
+
+
+  <script>
+    const toggleBtn = document.getElementById("toggleModeBtn");
+    const root = document.documentElement;
+
+    // Dark mode toggle
+    if (localStorage.getItem("theme") === "dark") {
+      root.classList.add("dark-mode");
+      toggleBtn.textContent = "☀️ Light Mode";
+    }
+
+    toggleBtn.addEventListener("click", () => {
+      root.classList.toggle("dark-mode");
+      const isDark = root.classList.contains("dark-mode");
+      toggleBtn.textContent = isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+    });
+
+    // Profile image upload and preview
+    const profileImage = document.getElementById("profileImage");
+    const photoUpload = document.getElementById("photoUpload");
+
+    profileImage.addEventListener("click", () => {
+      photoUpload.click();
+    });
+
+    photoUpload.addEventListener("change", () => {
+      const file = photoUpload.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        profileImage.src = reader.result;
+        localStorage.setItem("profile_photo", reader.result);
+      };
+      reader.readAsDataURL(file);
+    });
+
+    // Load saved profile data
+    function loadProfile() {
+      const fields = ["name", "course", "year", "urn", "department", "skills", "interests"];
+      fields.forEach(field => {
+        const input = document.getElementById(field);
+        input.value = localStorage.getItem(`profile_${field}`) || "";
+      });
+
+      // Load profile photo
+      const savedPhoto = localStorage.getItem("profile_photo");
+      if (savedPhoto) {
+        profileImage.src = savedPhoto;
+      }
+    }
+
+    // Save profile data with validation
+    document.getElementById("saveProfileBtn").addEventListener("click", () => {
+      const fields = ["name", "course", "year", "urn", "department", "skills", "interests"];
+      let isValid = true;
+
+      // Simple validation for required fields
+      fields.forEach(field => {
+        const input = document.getElementById(field);
+        if ((field === "skills" || field === "interests")) return; // optional fields
+        if (!input.value.trim()) {
+          alert(`Please fill the ${field.charAt(0).toUpperCase() + field.slice(1)} field.`);
+          input.focus();
+          isValid = false;
+          return;
+        }
+      });
+
+      if (!isValid) return;
+
+      // Save all fields trimmed
+      fields.forEach(field => {
+        const input = document.getElementById(field);
+        localStorage.setItem(`profile_${field}`, input.value.trim());
+      });
+
+      alert("Profile saved successfully!");
+    });
+
+    window.onload = loadProfile;
+
+
+function showProfileSummary() {
+  const summaryDiv = document.getElementById("profileSummary");
+  const summary = `
+    <h3>👤 Profile Summary</h3>
+    <p><strong>Name:</strong> ${localStorage.getItem("profile_name")}</p>
+    <p><strong>URN:</strong> ${localStorage.getItem("profile_urn")}</p>
+    <p><strong>Course:</strong> ${localStorage.getItem("profile_course")}</p>
+    <p><strong>Year:</strong> ${localStorage.getItem("profile_year")}</p>
+    <p><strong>Department:</strong> ${localStorage.getItem("profile_department")}</p>
+    <p><strong>Skills:</strong> ${localStorage.getItem("profile_skills")}</p>
+    <p><strong>Interests:</strong> ${localStorage.getItem("profile_interests")}</p>
+  `;
+  summaryDiv.innerHTML = summary;
+  summaryDiv.style.display = "block";
+}
+
+alert("Profile saved successfully!");
+showProfileSummary();
+
+  </script>
+</body>
+
+</html>

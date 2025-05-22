@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CampusMate - My Connections</title>
+    <!-- Apply dark mode early (before CSS loads) -->
+  <script>
+    if (localStorage.getItem("theme") === "dark") {
+      document.documentElement.classList.add("dark-mode");
+    }
+  </script>
+
+  <link rel="stylesheet" href="connection.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <button id="toggleModeBtn" style="position: fixed; top: 10px; right: 10px; z-index: 1001;">
+    🌙 Dark Mode
+  </button>
+
+  <h2>My Connections</h2>
+
+  <div class="connection-section">
+    <h3>Incoming Requests</h3>
+    <div class="connection-list" id="incomingRequests"></div>
+
+    <hr style="margin: 2rem 0;">
+
+    <h3>Accepted Connections</h3>
+    <div class="connection-list" id="acceptedConnections"></div>
+  </div>
+
+  <!-- Bottom Navbar -->
+  <nav class="bottom-navbar">
+    <a href="index.html"><button class="nav-btn"><span>🏠</span><small>Home</small></button></a>
+    <a href="browse.html"><button class="nav-btn"><span>🌐</span><small>Browse</small></button></a>
+    <a href="connections.html"><button class="nav-btn"><span>🤝</span><small>Connections</small></button></a>
+    <a href="profile.html"><button class="nav-btn"><span>👤</span><small>Profile</small></button></a>
+  </nav>
+
+  <script>
+    const toggleBtn = document.getElementById("toggleModeBtn");
+    const root = document.documentElement;
+
+    if (localStorage.getItem("theme") === "dark") {
+      root.classList.add("dark-mode");
+      toggleBtn.textContent = "☀️ Light Mode";
+    }
+
+    toggleBtn.addEventListener("click", () => {
+      root.classList.toggle("dark-mode");
+      const isDark = root.classList.contains("dark-mode");
+      toggleBtn.textContent = isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+    });
+
+    const incomingRequestsEl = document.getElementById("incomingRequests");
+    const acceptedConnectionsEl = document.getElementById("acceptedConnections");
+
+    const getConnections = () => {
+      return {
+        requests: JSON.parse(localStorage.getItem("incomingRequests")) || [],
+        accepted: JSON.parse(localStorage.getItem("acceptedConnections")) || []
+      };
+    };
+
+    const saveConnections = (requests, accepted) => {
+      localStorage.setItem("incomingRequests", JSON.stringify(requests));
+      localStorage.setItem("acceptedConnections", JSON.stringify(accepted));
+    };
+
+    const renderConnections = () => {
+      const { requests, accepted } = getConnections();
+      incomingRequestsEl.innerHTML = "";
+      acceptedConnectionsEl.innerHTML = "";
+
+      requests.forEach((user, index) => {
+        const card = document.createElement("div");
+        card.className = "connection-card";
+        card.innerHTML = `
+          <div class="connection-card-content">
+            <img src="${user.image || 'assets/default-avatar.png'}" class="connection-avatar" alt="${user.name}">
+            <div class="connection-info">
+              <strong>${user.name}</strong><br>
+              ${user.department} - ${user.year}
+            </div>
+          </div>
+          <div class="connection-actions">
+            <button class="accept-btn" onclick="handleAccept(${index})">Accept</button>
+            <button class="reject-btn" onclick="handleReject(${index})">Reject</button>
+          </div>
+        `;
+        incomingRequestsEl.appendChild(card);
+      });
+
+      accepted.forEach((user) => {
+        const card = document.createElement("div");
+        card.className = "connection-card";
+        card.innerHTML = `
+          <div class="connection-card-content">
+            <img src="${user.image || 'assets/default-avatar.png'}" class="connection-avatar" alt="${user.name}">
+            <div class="connection-info">
+              <strong>${user.name}</strong><br>
+              ${user.department} - ${user.year}
+            </div>
+          </div>
+        `;
+        acceptedConnectionsEl.appendChild(card);
+      });
+    };
+
+    const handleAccept = (index) => {
+      const { requests, accepted } = getConnections();
+      accepted.push(requests[index]);
+      requests.splice(index, 1);
+      saveConnections(requests, accepted);
+      renderConnections();
+    };
+
+    const handleReject = (index) => {
+      const { requests, accepted } = getConnections();
+      requests.splice(index, 1);
+      saveConnections(requests, accepted);
+      renderConnections();
+    };
+
+    renderConnections();
+  </script>
+</body>
+</html>

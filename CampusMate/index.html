@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CampusMate - Home</title>
+  <link rel="icon" href="assets/fav4.jpg" type="image/x-icon">
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <button id="toggleModeBtn" style="position: fixed; top: 10px; right: 10px; z-index: 1001;">
+    🌙 Dark Mode
+  </button>
+
+  <div class="main-content">
+    <!-- Home Section -->
+    <div id="homeSection">
+      <div class="container">
+        <h1>📢 CampusMate Feed</h1>
+        <div id="postsContainer"></div>
+      </div>
+    </div>
+
+    <!-- Search Section -->
+    <div id="searchSection" style="display:none;">
+      <div class="container">
+        <h1>🔍 Search Posts</h1>
+        <input type="text" id="searchInput" placeholder="Search posts..." />
+        <div id="searchResults"></div>
+      </div>
+    </div>
+
+    <!-- Post Form Section -->
+    <div id="postSection" style="display:none;">
+      <div class="container">
+        <h1>📝 Create Post</h1>
+        <form id="postForm">
+          <select id="sortOptions" style="margin-bottom: 15px;">
+            <option value="newest">🆕 Newest First</option>
+            <option value="oldest">📜 Oldest First</option>
+            <option value="likes">🔥 Most Liked</option>
+          </select>
+
+          <input type="text" id="title" placeholder="Title" required>
+          <textarea id="content" placeholder="Write about your post..." required></textarea>
+          <select id="category" required>
+            <option value="">-- Select Category --</option>
+            <option value="Notes">📝 Notes</option>
+            <option value="Help">🙋 Help</option>
+            <option value="Lost & Found">🧥 Lost & Found</option>
+            <option value="Buy/Sell">💰 Buy/Sell</option>
+            <option value="Announcement">📢 Announcement</option>
+          </select>
+          <input type="file" id="postImage" accept="image/*" />
+          <img id="imagePreview" style="display:none; max-width: 100%; margin-top: 10px;" />
+          <button type="submit">Post</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Navbar -->
+  <nav class="bottom-navbar">
+    <button class="nav-btn" onclick="showSection('home')">
+      <span>🏠</span><small>Home</small>
+    </button>
+    <button class="nav-btn" onclick="showSection('search')">
+      <span>🔍</span><small>Search</small>
+    </button>
+    <button class="nav-btn post-btn" onclick="showSection('post')">
+      <span>➕</span><small>Post</small>
+    </button>
+    <a href="profile.html" style="text-decoration: none;">
+      <button class="nav-btn">
+        <span>👤</span><small>Profile</small>
+      </button>
+    </a>
+    <a href="browse.html" style="text-decoration: none;">
+      <button class="nav-btn">
+        <span>🌐</span><small>Browse</small>
+      </button>
+    </a>
+
+  </nav>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
