@@ -42,11 +42,8 @@
 
 ## 🖼️ Screenshots
 
-> 📸
-> ### 🖼️ Screenshots
-
 #### 🏠 Home Page
-![Home Page](./campusMate/assets/home-page.png)
+![Home Page](./CampusMate/assets/home-page.png)
 
 #### 👤 Profile Page (Dark Mode)
 ![Profile Dark](assets/profile-dark.png)
