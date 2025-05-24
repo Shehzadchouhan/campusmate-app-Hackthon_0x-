@@ -4,8 +4,8 @@
   --primary-hover: #45a049;
   --danger-color: #e53935;
   --danger-hover: #d32f2f;
-  --bg-light: #f9f9f9;
-  --bg-dark: #121212;
+  --bg-light: #bbdae7;
+  --bg-dark: #0f0f0f;
   --text-light: #fff;
   --text-dark: #222;
   --font-family: 'Poppins', sans-serif;
@@ -20,7 +20,7 @@ body {
   transition: background-color 0.3s, color 0.3s;
 }
 
-.dark-mode {
+body.dark-mode{
   background-color: var(--bg-dark);
   color: var(--text-light);
 }
@@ -205,4 +205,82 @@ hr {
 /* Navbar links: no underline */
 .bottom-navbar a {
   text-decoration: none;
+}
+
+
+.background-animation {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  display: none;
+}
+
+body.light-mode .light-background {
+  display: block;
+}
+body.dark-mode .dark-background {
+  display: block;
+}
+
+/* Light mode visuals */
+.light-background .sunlight {
+  position: absolute;
+  top: -100px; left: -100px;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(255, 223, 70, 0.5), transparent 70%);
+}
+
+.light-background .cloud {
+  position: absolute;
+  background: #f1f1f1;
+  border-radius: 50%;
+  opacity: 0.5;
+  filter: blur(20px);
+  animation: moveClouds 60s linear infinite;
+}
+.cloud1 { top: 60px; left: -250px; width: 200px; height: 100px; }
+.cloud2 { top: 140px; left: -200px; width: 150px; height: 80px; }
+.cloud3 { top: 220px; left: -300px; width: 300px; height: 120px; }
+.cloud4 { top: 350px; left: -150px; width: 180px; height: 90px; }
+.cloud5 { top: 450px; left: -100px; width: 220px; height: 110px; }
+
+@keyframes moveClouds {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(160vw); }
+}
+
+/* Dark mode visuals */
+.dark-background .star {
+  position: absolute;
+  background: white;
+  width: 2px; height: 2px;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: fallStars 10s linear infinite;
+}
+
+.star1 { top: -10%; left: 20%; animation-delay: 0s; }
+.star2 { top: -15%; left: 30%; animation-delay: 2s; }
+.star3 { top: -20%; left: 50%; animation-delay: 4s; }
+.star4 { top: -5%; left: 70%; animation-delay: 1s; }
+.star5 { top: -8%; left: 90%; animation-delay: 3s; }
+.star6 { top: -12%; left: 10%; animation-delay: 5s; }
+.star7 { top: -18%; left: 40%; animation-delay: 6s; }
+.star8 { top: -22%; left: 60%; animation-delay: 7s; }
+
+@keyframes fallStars {
+  0% { transform: translateY(0); opacity: 0.5; }
+  100% { transform: translateY(120vh); opacity: 0; }
+}
+
+
+#toggleModeBtn{
+      position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1001;
 }

@@ -1,10 +1,10 @@
-/* Google Font */ 
+/* Google Font */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
 /* Variables */
 :root {
   --primary: #6c63ff;
-  --bg: #f4f7fb;
+  --bg: #bbdae7;
   --white: #ffffff;
   --text: #2c3e50;
   --text-muted: #7f8c8d;
@@ -12,6 +12,7 @@
   --border: #e0e0e0;
   --shadow: rgba(0, 0, 0, 0.08);
   --hover-shadow: rgba(0, 0, 0, 0.15);
+  --bg-dark: #121212;
 }
 
 .dark-mode {
@@ -230,7 +231,7 @@ form#postForm button:hover {
   padding: 10px;
   border-radius: 8px;
   margin-top: 10px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -238,8 +239,7 @@ form#postForm button:hover {
 
 .comment-box input {
   flex: 1;
-  color:white
-  padding: 8px;
+  color: white padding: 8px;
   border: 1px solid var(--border);
   border-radius: 6px;
   font-size: 0.95rem;
@@ -398,4 +398,201 @@ form#postForm button:hover {
     width: 100%;
     margin: 5px 0 0;
   }
+}
+
+/* Common animated background container */
+.background-animation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+  display: none;
+}
+
+.light-background,
+.dark-background {
+  display: none;
+}
+
+/* 🌤️ LIGHT MODE STYLES */
+body.light-mode .light-background {
+  display: block;
+}
+
+.light-background .sunlight {
+  position: absolute;
+  top: -100px;
+  left: -100px;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle at center, rgba(255, 223, 70, 0.5), transparent 70%);
+  z-index: 2;
+}
+
+.light-background .cloud {
+  position: absolute;
+  background: #f1f1f1;
+  opacity: 0.5;
+  border-radius: 50%;
+  filter: blur(20px);
+  animation: moveClouds 60s linear infinite;
+}
+
+.cloud1 {
+  top: 60px;
+  left: -250px;
+  width: 200px;
+  height: 100px;
+}
+
+.cloud2 {
+  top: 140px;
+  left: -200px;
+  width: 150px;
+  height: 80px;
+}
+
+.cloud3 {
+  top: 220px;
+  left: -300px;
+  width: 300px;
+  height: 120px;
+}
+
+.cloud4 {
+  top: 350px;
+  left: -150px;
+  width: 180px;
+  height: 90px;
+}
+
+.cloud5 {
+  top: 450px;
+  left: -100px;
+  width: 220px;
+  height: 110px;
+}
+
+@keyframes moveClouds {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(160vw);
+  }
+}
+
+/* 🌌 DARK MODE STYLES */
+body.dark-mode .dark-background {
+  display: block;
+}
+
+.dark-background .star {
+  position: absolute;
+  background: white;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: twinkle 4s ease-in-out infinite alternate,
+    moveStars 20s linear infinite;
+}
+
+/* Position stars randomly */
+.star1 {
+  top: 5%;
+  left: 5%;
+  animation-delay: 0s;
+}
+
+.star2 {
+  top: 15%;
+  left: 30%;
+  animation-delay: 1s;
+}
+
+.star3 {
+  top: 25%;
+  left: 70%;
+  animation-delay: 2s;
+}
+
+.star4 {
+  top: 35%;
+  left: 20%;
+  animation-delay: 3s;
+}
+
+.star5 {
+  top: 45%;
+  left: 80%;
+  animation-delay: 4s;
+}
+
+.star6 {
+  top: 55%;
+  left: 40%;
+  animation-delay: 2.5s;
+}
+
+.star7 {
+  top: 65%;
+  left: 10%;
+  animation-delay: 1.5s;
+}
+
+.star8 {
+  top: 75%;
+  left: 60%;
+  animation-delay: 3.5s;
+}
+
+@keyframes twinkle {
+  0% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.3);
+  }
+
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+}
+
+@keyframes moveStars {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  100% {
+    transform: translate(100vw, 100vh);
+  }
+}
+
+
+
+#toggleModeBtn {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 1001;
+  background-color: var(--bg-dark);
+  border: none;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: background-color 0.3s;
 }

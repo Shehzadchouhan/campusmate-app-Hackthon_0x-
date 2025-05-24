@@ -2,15 +2,17 @@
 body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
-    background-color: #f4f4f4;
+    background-color: #bbdae7;
     color: #333;
     transition: background-color 0.3s, color 0.3s;
+    height: 700px;
 }
+
 :root {
-  --bg-dark: #121212;
-  --text-light: #eeeeee;
-  --primary-color: #333;
-  --primary-hover: #555;
+    --bg-dark: #121212;
+    --text-light: #eeeeee;
+    --primary-color: #333;
+    --primary-hover: #555;
 }
 
 .container {
@@ -199,25 +201,25 @@ body.dark-mode .filters select {
 /* Toggle Mode Button */
 
 .dark-mode {
-  background-color: var(--bg-dark);
-  color: var(--text-light);
+    background-color: var(--bg-dark);
+    color: var(--text-light);
 }
 
 /* Dark mode toggle button */
 #toggleModeBtn {
-  background: var(--primary-color);
-  border: none;
-  color: white;
-  padding: 8px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 14px;
-  transition: background-color 0.3s;
+    background: var(--primary-color);
+    border: none;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    transition: background-color 0.3s;
 }
 
 #toggleModeBtn:hover {
-  background: var(--primary-hover);
+    background: var(--primary-hover);
 }
 
 #toggleModeBtn:hover {
@@ -235,6 +237,7 @@ body.dark-mode .filters select {
     padding: 10px 0;
     z-index: 1000;
 }
+
 .nav-btn {
     background: none;
     border: none;
@@ -245,13 +248,14 @@ body.dark-mode .filters select {
     color: #555;
     cursor: pointer;
 }
+
 .nav-btn:hover {
     color: #000;
 }
 
-.bottom-navbar  a{
-  text-decoration: none;
-  color: grey;
+.bottom-navbar a {
+    text-decoration: none;
+    color: grey;
 }
 
 /* Dark Mode Styles */
@@ -304,4 +308,253 @@ body.dark-mode .filters select {
 
 .dark-mode .nav-btn:hover {
     background-color: #333;
+}
+
+/* Responsive Styles */
+
+/* Tablets (<= 1024px) */
+@media (max-width: 1024px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+        margin: 60px auto 20px;
+        padding: 0 15px;
+    }
+
+    .filters {
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+    }
+
+    .filters select {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    h1 {
+        font-size: 36px;
+    }
+
+    .card-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+}
+
+/* Mobile devices (<= 768px) */
+@media (max-width: 768px) {
+    .header-row {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+
+    #connectionsBtn {
+        width: 100%;
+        max-width: 250px;
+    }
+
+    .filters {
+        margin: 15px 0 20px;
+    }
+
+    .student-card {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .profile-thumb {
+        width: 60px;
+        height: 60px;
+    }
+
+
+}
+
+/* Very small devices (<= 480px) */
+@media (max-width: 480px) {
+    .filters select {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .student-card h3 {
+        font-size: 16px;
+    }
+
+    .student-card p {
+        font-size: 13px;
+    }
+
+    .student-card button {
+        padding: 6px 12px;
+        font-size: 14px;
+    }
+
+}
+
+
+.background-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+    display: none;
+}
+
+body.light-mode .light-background {
+    display: block;
+}
+
+body.dark-mode .dark-background {
+    display: block;
+}
+
+/* Light mode visuals */
+.light-background .sunlight {
+    position: absolute;
+    top: -100px;
+    left: -100px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255, 223, 70, 0.5), transparent 70%);
+}
+
+.light-background .cloud {
+    position: absolute;
+    background: #f1f1f1;
+    border-radius: 50%;
+    opacity: 0.5;
+    filter: blur(20px);
+    animation: moveClouds 60s linear infinite;
+}
+
+.cloud1 {
+    top: 60px;
+    left: -250px;
+    width: 200px;
+    height: 100px;
+}
+
+.cloud2 {
+    top: 140px;
+    left: -200px;
+    width: 150px;
+    height: 80px;
+}
+
+.cloud3 {
+    top: 220px;
+    left: -300px;
+    width: 300px;
+    height: 120px;
+}
+
+.cloud4 {
+    top: 350px;
+    left: -150px;
+    width: 180px;
+    height: 90px;
+}
+
+.cloud5 {
+    top: 450px;
+    left: -100px;
+    width: 220px;
+    height: 110px;
+}
+
+@keyframes moveClouds {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(160vw);
+    }
+}
+
+/* Dark mode visuals */
+.dark-background .star {
+    position: absolute;
+    background: white;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: fallStars 10s linear infinite;
+}
+
+.star1 {
+    top: -10%;
+    left: 20%;
+    animation-delay: 0s;
+}
+
+.star2 {
+    top: -15%;
+    left: 30%;
+    animation-delay: 2s;
+}
+
+.star3 {
+    top: -20%;
+    left: 50%;
+    animation-delay: 4s;
+}
+
+.star4 {
+    top: -5%;
+    left: 70%;
+    animation-delay: 1s;
+}
+
+.star5 {
+    top: -8%;
+    left: 90%;
+    animation-delay: 3s;
+}
+
+.star6 {
+    top: -12%;
+    left: 10%;
+    animation-delay: 5s;
+}
+
+.star7 {
+    top: -18%;
+    left: 40%;
+    animation-delay: 6s;
+}
+
+.star8 {
+    top: -22%;
+    left: 60%;
+    animation-delay: 7s;
+}
+
+@keyframes fallStars {
+    0% {
+        transform: translateY(0);
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: translateY(120vh);
+        opacity: 0;
+    }
+}
+
+#toggleModeBtn {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1001;
 }
