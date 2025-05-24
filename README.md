@@ -46,13 +46,13 @@
 ![Home Page](./CampusMate/assets/home-page.png)
 
 #### 👤 Profile Page (Dark Mode)
-![Profile Dark](assets/profile-dark.png)
+![Profile Dark](./CampusMate/assets/profile-dark.png)
 
 #### 🔗 Connections Page
-![Connections Page](assets/connections-page.png)
+![Connections Page](./CampusMate/assets/connections-page.png)
 
 #### 🔍 Browse Page (Dark Mode)
-![Browse Light](assets/browse-light.png)
+![Browse Light](./CampusMate/assets/browse-light.png)
 
 
 ---
