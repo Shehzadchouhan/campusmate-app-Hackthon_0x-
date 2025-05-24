@@ -46,7 +46,7 @@
 > ### 🖼️ Screenshots
 
 #### 🏠 Home Page
-![Home Page](assets/home-page.png)
+![Home Page](./assets/home-page.png)
 
 #### 👤 Profile Page (Dark Mode)
 ![Profile Dark](assets/profile-dark.png)
