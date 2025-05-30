@@ -6,6 +6,23 @@
 
 ---
 
+## 🖼️ Screenshots
+
+#### 🏠 Home Page
+![Home Page](./CampusMate/assets/home-page.png)
+
+#### 👤 Profile Page (Dark Mode)
+![Profile Dark](./CampusMate/assets/profile-dark.png)
+
+#### 🔗 Connections Page
+![Connections Page](./CampusMate/assets/connections-page.png)
+
+#### 🔍 Browse Page (Dark Mode)
+![Browse Light](./CampusMate/assets/browse-light.png)
+
+
+---
+
 ## 📌 Features
 
 - 👤 **Create and Edit Profile**
@@ -37,23 +54,6 @@
 - **CSS3** 🎨  
 - **JavaScript (ES6)** ⚙️  
 - **Netlify** 🌐 *(for hosting)*
-
----
-
-## 🖼️ Screenshots
-
-#### 🏠 Home Page
-![Home Page](./CampusMate/assets/home-page.png)
-
-#### 👤 Profile Page (Dark Mode)
-![Profile Dark](./CampusMate/assets/profile-dark.png)
-
-#### 🔗 Connections Page
-![Connections Page](./CampusMate/assets/connections-page.png)
-
-#### 🔍 Browse Page (Dark Mode)
-![Browse Light](./CampusMate/assets/browse-light.png)
-
 
 ---
 
